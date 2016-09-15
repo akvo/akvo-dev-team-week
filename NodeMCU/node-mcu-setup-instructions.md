@@ -1,24 +1,26 @@
 # Getting started with NodeMCU and mqtt
 
 ## About NodeMCU
-NodeMCU is a microcontroller based on the ESP8266 chip providing wifi connectivity and preloaded with a Lua interpreter.
+NodeMCU is a microcontroller based on the ESP8266 chip providing wifi connectivity. You can add a firmware with a Lua interpreter (or MicroPython, Lisp, Arduino, JavaScript for example; pick your poison).
 
 ## 1. USB drivers
 
-You will need a USB driver, either for CH340G or for CP2102  (depending on what type of NodeMCU you are using) to be able to communicate with your NodeMCU. (CH340G and CP2101 are USB to serial converter chips.)
+You will need a USB driver, either for _CH340G_ or for _CP2102_  (depending on what type of NodeMCU you are using) to be able to communicate with your NodeMCU. (CH340G and CP2101 are USB to serial converter chips.)
+
+The pcb that you got at DevWeek 2016 uses the _CH340G_ chip.
 
 ### Windows
 
 * [CH340G Windows drivers](https://codebender.cc/static/walkthrough/page/3)
 
-* [Silabs USBtoUART Bridge](http://www.silabs.com/products/mcu/Pages/USBtoUARTBridgeVCPDrivers.aspx?#windows)
+* ([Silabs USBtoUART Bridge](http://www.silabs.com/products/mcu/Pages/USBtoUARTBridgeVCPDrivers.aspx?#windows))
 
 
 ### MacOSx
 
 * [CH340G Mac drivers](http://blog.codebender.cc/2015/06/12/new-stuff-updated-mac-drivers/)
 
-* [Silabs USBtoUART Bridge](http://www.silabs.com/products/mcu/Pages/USBtoUARTBridgeVCPDrivers.aspx?#osx)
+* ([Silabs USBtoUART Bridge](http://www.silabs.com/products/mcu/Pages/USBtoUARTBridgeVCPDrivers.aspx?#osx))
 
 
 ## 2. New Firmware
@@ -222,4 +224,3 @@ https://github.com/nodemcu/nodemcu-devkit/wiki/Getting-Started-on-OSX
 http://frightanic.com/iot/comparison-of-esp8266-nodemcu-development-boards/
 https://github.com/themadinventor/esptool
 https://odd-one-out.serek.eu/esp8266-nodemcu-getting-started-hello-world/
-
