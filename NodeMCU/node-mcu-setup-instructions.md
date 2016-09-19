@@ -227,7 +227,7 @@ https://odd-one-out.serek.eu/esp8266-nodemcu-getting-started-hello-world/
 
 ## MacOS recipe addendum (by Gabriel)
 
-In Riga I couln't get my NodeMCU to work. I followed the above and tried some variations, but only got the fast blinking LED of a broken flash. When I came back home I sat down and tried again. These are the clues that led me to a working flashing.
+In Riga I couldn't get my NodeMCU to work. I followed the above and tried some variations, but only got the fast blinking LED of a broken flash. When I came back home I sat down and tried again. These are the clues that led me to a working flashing.
 
 After having tried different variants of the above and failed I started looking around at the docs to see if I could figure out what the problem might be. I suspected that the different units could have different hardware, in turn requiring defferent flashing parameters.
 
@@ -250,4 +250,4 @@ With this info in hand I got the paramteres right:
 esptool.py --port /dev/cu.wchusbserial1410 write_flash -fm=qio -fs=32m 0x00000 firmware/nodemcu-master-9-modules-2016-09-15-12-38-36-float.bin 0x3fc000 firmware/esp_init_data_default.bin
 ```
 
-The important bits I changed were ```-fs=32m``` and ```0x3fc000 firmware/esp_init_data_default.bin``
+The important bits I changed were ```-fs=32m``` and ```0x3fc000 firmware/esp_init_data_default.bin```.
