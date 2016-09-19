@@ -224,3 +224,30 @@ https://github.com/nodemcu/nodemcu-devkit/wiki/Getting-Started-on-OSX
 http://frightanic.com/iot/comparison-of-esp8266-nodemcu-development-boards/
 https://github.com/themadinventor/esptool
 https://odd-one-out.serek.eu/esp8266-nodemcu-getting-started-hello-world/
+
+## MacOS recipe addendum (by Gabriel)
+
+In Riga I couln't get my NodeMCU to work. I followed the above and tried some variations, but only got the fast blinking LED of a broken flash. When I came back home I sat down and tried again. These are the clues that led me to a working flashing.
+
+After having tried different variants of the above and failed I started looking around at the docs to see if I could figure out what the problem might be. I suspected that the different units could have different hardware, in turn requiring defferent flashing parameters.
+
+In the esptool docs there's a [link](https://github.com/themadinventor/esptool#read-spi-flash-id) to a [flashrom header file](http://code.coreboot.org/p/flashrom/source/tree/HEAD/trunk/flashchips.h) with manufacturer name and part number.
+
+Running esptool flash_id on my device yeilded:
+
+```
+-> % esptool.py --port /dev/cu.wchusbserial1410 flash_id
+esptool.py v1.2-dev
+Connecting...
+Manufacturer: ef
+Device: 4016
+```
+This led me [here](https://code.coreboot.org/p/flashrom/source/tree/HEAD/trunk/flashchips.h#L888) and ultimately [here](https://code.coreboot.org/p/flashrom/source/tree/HEAD/trunk/flashchips.h#L899). Googling "W25Q32BV" led me [to a PDF from the chip maufacturer](https://www.winbond.com/resource-files/w25q32bv_revi_100413_wo_automotive.pdf) with detailed specs. The key piece of info was that it's a 32Mbit chip. At the bottom of [this page in the NodeMCU docs](http://nodemcu.readthedocs.io/en/latest/en/flash/#upgrading-firmware) the address for esp_init_data_default.bin is listed.
+
+With this info in hand I got the paramteres right:
+
+```
+esptool.py --port /dev/cu.wchusbserial1410 write_flash -fm=qio -fs=32m 0x00000 firmware/nodemcu-master-9-modules-2016-09-15-12-38-36-float.bin 0x3fc000 firmware/esp_init_data_default.bin
+```
+
+The important bits I changed were ```-fs=32m``` and ```0x3fc000 firmware/esp_init_data_default.bin``
